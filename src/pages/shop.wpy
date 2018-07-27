@@ -1,0 +1,30 @@
+<style lang="less">
+  .container {
+    background-color: #eee;
+  }
+</style>
+<template>
+  <view class="container">
+  商城
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Shop extends wepy.page {
+    config = {
+      navigationBarTitleText: '商城'
+    }
+    components = {
+    }
+
+    data = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>

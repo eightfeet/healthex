@@ -1,0 +1,69 @@
+<style lang="less">
+  .container {
+    background-color: #eee;
+  }
+</style>
+<template>
+  <view class="container">
+   个人信息
+    <view>
+      {{userName}}
+    </view>
+    <view>
+      {{nickName}}
+    </view>
+    <view>
+      {{userPhone}}
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import { LOGIN_OUT } from '../store/types/auth'
+  import state from '../utils/globalData'
+  import { signIn } from '../store/actions'
+  import { getList, getListB } from '../services'
+
+  @connect({
+    user (state) {
+      return state.auth.user
+    }
+  }, {
+    signIn,
+    loginOut: LOGIN_OUT
+  })
+
+  export default class Shop extends wepy.page {
+    config = {
+      navigationBarTitleText: '首页'
+    }
+    components = {
+    }
+
+    data = {
+      userName: '',
+      nickName: '',
+      userPhone: ''
+    }
+
+    methods = {
+      init: async () => {
+        const userdata = await this.methods.signIn()
+        this.userName = userdata.payload.user.name
+        this.nickName = userdata.payload.user.nickName
+        this.userPhone = userdata.payload.user.phone
+        console.log(this.$parent.globalData.isLogging)
+        console.log(state)
+        this.$apply()
+      }
+    }
+
+    onLoad() {
+      getList().catch(err => console.log(err))
+      getListB().catch(err => console.log(err))
+      this.methods.init()
+    }
+  }
+</script>
