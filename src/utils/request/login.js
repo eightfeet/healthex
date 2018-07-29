@@ -12,13 +12,13 @@ export default function login(url) {
         if (res.statusCode !== 200) {
           setTimeout(() => {
             state.logging = false
-            state.loggedIn = false
+            state.loggedIn = 2
             reject(res)
           }, 3000)
         } else {
           setTimeout(() => {
             state.logging = false
-            state.loggedIn = true
+            state.loggedIn = 1
             resolve(res)
           }, 3000)
         }

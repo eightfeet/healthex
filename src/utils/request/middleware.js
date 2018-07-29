@@ -30,28 +30,36 @@ export function contentType(ctx, next) {
 }
 
 export async function checkLogin(ctx, next) {
-  if (state.loggedIn) {
-    return next()
-  }
   let timeer = null
-  if (state.logging) {
-    timeer = setInterval(() => {
-      console.log('等待中')
-      if (state.loggedIn) {
-        clearInterval(timeer)
-        return next()
+  const error = '登录失败'
+  switch (state.loggedIn) {
+    case 0: // 未登录
+      if (state.logging) { // 当前正在登录中
+        timeer = setInterval(() => {
+          if (state.loggedIn === 1) {
+            clearInterval(timeer)
+            return next()
+          } else if (state.loggedIn === 2) {
+            clearInterval(timeer)
+            return Promise.reject(error)
+          }
+        })
+      } else {
+        try {
+          console.log('尝试登录')
+          clearInterval(timeer)
+          const res = await login()
+          console.log(res)
+          return next()
+        } catch (error) {
+          return Promise.reject(error)
+        }
       }
-    })
-  } else {
-    try {
-      console.log('尝试登录')
-      clearInterval(timeer)
-      const res = await login()
-      console.log(res)
+      break
+    case 1: // 已登录
       return next()
-    } catch (error) {
-      console.log('登录失败', error)
-    }
+    case 2: // 登录失败
+      return Promise.reject(error)
   }
 }
 
