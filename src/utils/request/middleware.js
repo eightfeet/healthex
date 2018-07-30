@@ -5,8 +5,10 @@
  */
 
 import { stringify } from 'qs'
+import extend from 'extend'
+import request from './request'
 import state from '../globalData'
-import { methodWithBody, methodWithoutBody } from './utils'
+import { methodWithBody } from './utils'
 import login from './login'
 
 export function contentType(ctx, next) {
@@ -32,17 +34,28 @@ export function contentType(ctx, next) {
 export async function checkLogin(ctx, next) {
   let timeer = null
   const error = '登录失败'
+  const { url, ...options } = extend(true, {}, ctx)
   switch (state.loggedIn) {
     case 0: // 未登录
       if (state.logging) { // 当前正在登录中
-        timeer = setInterval(() => {
-          if (state.loggedIn === 1) {
-            clearInterval(timeer)
+        const delay = 100
+        const requestId = state.requestQueue += 1
+        const daly = new Promise((resolve, reject) => {
+          timeer = setInterval(() => {
+            if (state.loggedIn === 1) {
+              clearInterval(timeer)
+              resolve(next)
+            } else if (state.loggedIn === 2) {
+              clearInterval(timeer)
+              reject(error)
+            }
+          })
+        })
+        daly.then((next) => {
+          setTimeout(() => {
+            console.log('完成登录', `请求ID${requestId}`, `队列总数${state.requestQueue}`)
             return next()
-          } else if (state.loggedIn === 2) {
-            clearInterval(timeer)
-            return Promise.reject(error)
-          }
+          }, delay * requestId)
         })
       } else {
         try {
@@ -52,14 +65,19 @@ export async function checkLogin(ctx, next) {
           console.log(res)
           return next()
         } catch (error) {
-          return Promise.reject(error)
+          return next()
         }
       }
       break
     case 1: // 已登录
-      return next()
+      const res = await next()
+      if (res.statusCode === 401) {
+        state.loggedIn = 0
+        return request.fetch(url, options)
+      }
+      return res.data
     case 2: // 登录失败
-      return Promise.reject(error)
+      return next()
   }
 }
 
