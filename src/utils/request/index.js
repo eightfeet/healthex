@@ -9,6 +9,7 @@ import * as middlewares from './middleware';
 
 const inst = new Request({
   type: 'json',
+  baseUrl: 'https://yygj.by-health.com/weapp_api/'
 }, [
   middlewares.checkLogin,
   middlewares.contentType,

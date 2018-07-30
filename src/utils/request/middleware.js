@@ -33,8 +33,8 @@ export function contentType(ctx, next) {
 
 export async function checkLogin(ctx, next) {
   let timeer = null
-  const error = '登录失败'
   const { url, ...options } = extend(true, {}, ctx)
+  const error = `由于程序登录失败，当前接口${url}可能无法正常调用`
   switch (state.loggedIn) {
     case 0: // 未登录
       if (state.logging) { // 当前正在登录中
@@ -56,13 +56,17 @@ export async function checkLogin(ctx, next) {
             console.log('完成登录', `请求ID${requestId}`, `队列总数${state.requestQueue}`)
             return next()
           }, delay * requestId)
+        }).catch(error => {
+          setTimeout(() => {
+            console.warn(error)
+            return next()
+          }, delay * requestId)
         })
       } else {
         try {
           console.log('尝试登录')
           clearInterval(timeer)
-          const res = await login()
-          console.log(res)
+          await login()
           return next()
         } catch (error) {
           return next()

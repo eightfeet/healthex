@@ -22,9 +22,9 @@
   import wepy from 'wepy'
   import { connect } from 'wepy-redux'
   import { LOGIN_OUT } from '../store/types/auth'
-  import state from '../utils/globalData'
+  // import state from '../utils/globalData'
   import { signIn } from '../store/actions'
-  import { getList, getListB } from '../services'
+  import { getList } from '../services'
 
   @connect({
     user (state) {

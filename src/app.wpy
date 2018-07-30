@@ -12,7 +12,7 @@
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
-import state from '../globalData'
+// import state from './utils/globalData'
 import { setStore } from 'wepy-redux'
 import configStore from './store'
 
