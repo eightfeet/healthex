@@ -11,10 +11,12 @@ const inst = new Request({
   type: 'json',
   baseUrl: 'https://yygj.by-health.com/weapp_api/'
 }, [
+  middlewares.requestQueue,
   middlewares.checkLogin,
   middlewares.contentType,
   middlewares.http,
   middlewares.timeout,
+  middlewares.delay
 ]);
 
 export default inst;

@@ -6,10 +6,13 @@
 
 import { stringify } from 'qs'
 import extend from 'extend'
+import Semaphore from 'semaphore-async-await'
 import request from './request'
 import state from '../globalData'
 import { methodWithBody } from './utils'
 import login from './login'
+
+const lock = new Semaphore(3)
 
 export function contentType(ctx, next) {
   if (methodWithBody(ctx.method)) {
@@ -38,8 +41,6 @@ export async function checkLogin(ctx, next) {
   switch (state.loggedIn) {
     case 0: // 未登录
       if (state.logging) { // 当前正在登录中
-        const delay = 100
-        const requestId = state.requestQueue += 1
         const daly = new Promise((resolve, reject) => {
           timeer = setInterval(() => {
             if (state.loggedIn === 1) {
@@ -51,16 +52,11 @@ export async function checkLogin(ctx, next) {
             }
           })
         })
-        daly.then((next) => {
-          setTimeout(() => {
-            console.log('完成登录', `请求ID${requestId}`, `队列总数${state.requestQueue}`)
-            return next()
-          }, delay * requestId)
+        return daly.then((next) => {
+          return next()
         }).catch(error => {
-          setTimeout(() => {
-            console.warn(error)
-            return next()
-          }, delay * requestId)
+          console.log(error)
+          return next()
         })
       } else {
         try {
@@ -75,13 +71,22 @@ export async function checkLogin(ctx, next) {
       break
     case 1: // 已登录
       const res = await next()
-      if (res.statusCode === 401) {
+      if (res.data.code === 401) {
         state.loggedIn = 0
         return request.fetch(url, options)
       }
       return res.data
     case 2: // 登录失败
       return next()
+  }
+}
+
+export async function requestQueue(ctx, next) {
+  try {
+    await lock.wait()
+    return await next()
+  } finally {
+    lock.release()
   }
 }
 
@@ -115,4 +120,10 @@ export function timeout(ctx, next) {
   }
 
   return next()
+}
+
+export function delay(ctx, next) {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(), 3000)
+  }).then(next)
 }

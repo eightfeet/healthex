@@ -59,15 +59,15 @@
     }
 
     onLoad() {
-      getList().catch(err => console.log(1, err))
-      getList().catch(err => console.log(2, err))
-      getList().catch(err => console.log(3, err))
-      getList().catch(err => console.log(4, err))
-      getList().catch(err => console.log(5, err))
-      getList().catch(err => console.log(6, err))
-      getList().catch(err => console.log(7, err))
-      getList().catch(err => console.log(8, err))
-      getList().catch(err => console.log(9, err))
+      getList().then(res1 => console.log(1, res1)).catch(err => console.log(1, err))
+      getList().then(res2 => console.log(2, res2)).catch(err => console.log(2, err))
+      getList().then(res3 => console.log(3, res3)).catch(err => console.log(3, err))
+      getList().then(res4 => console.log(4, res4)).catch(err => console.log(4, err))
+      getList().then(res5 => console.log(5, res5)).catch(err => console.log(5, err))
+      getList().then(res6 => console.log(6, res6)).catch(err => console.log(6, err))
+      getList().then(res7 => console.log(7, res7)).catch(err => console.log(7, err))
+      getList().then(res8 => console.log(8, res8)).catch(err => console.log(8, err))
+      getList().then(res9 => console.log(9, res9)).catch(err => console.log(9, err))
     }
   }
 </script>
