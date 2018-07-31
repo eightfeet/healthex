@@ -2,37 +2,35 @@ import state from '../globalData'
 import { signature as stamp } from '../hash'
 
 export default function login(url) {
-  state.logging = true
-  wx.login({
-    success: data => {
-      console.log(2222, data.code, stamp(data.code))
-      // return new Promise((resolve, reject) => {
-      wx.request({
-        // eslint-disable-line
-        url: 'https://yygj.by-health.com/weapp_api/user/login',
-        method: 'POST',
-        data: {
-          code: stamp(data.code)
-        },
-        success: res => {
-          if (res.statusCode !== 200) {
-            setTimeout(() => {
-              state.logging = false
+  return new Promise((resolve, reject) => {
+    state.logging = true
+    wx.login({
+      success: data => {
+        console.log(2222, data.code, stamp(data.code))
+        const requestData = {
+          code: data.code,
+          timestamp: Date.now(),
+          serverKey: '2016'
+        }
+        requestData.sign = stamp(requestData, 'bcttcwls789')
+        wx.request({
+          url: 'https://yygj.by-health.com/weapp_api/user/login',
+          method: 'POST',
+          data: requestData,
+          success: res => {
+            console.log('res', res)
+            if (res.statusCode !== 200) {
               state.loggedIn = 2
-              return Promise.reject(res)
-            }, 3000)
-          } else {
-            setTimeout(() => {
-              state.logging = false
+              reject(res)
+            } else {
               state.loggedIn = 1
-              return Promise.resolve(res)
-            }, 3000)
-          }
-        },
-        fail: error => Promise.reject(error)
-      })
-      // })
-    },
-    fail: error => console.log(error)
+              resolve(res)
+            }
+          },
+          fail: error => reject(error)
+        })
+      },
+      fail: error => reject(error)
+    })
   })
 }

@@ -22,7 +22,7 @@
   import wepy from 'wepy'
   import { connect } from 'wepy-redux'
   import { LOGIN_OUT } from '../store/types/auth'
-  // import state from '../utils/globalData'
+  import state from '../utils/globalData'
   import { signIn } from '../store/actions'
   import { getList } from '../services'
 
@@ -59,7 +59,8 @@
     }
 
     onLoad() {
-      getList().then(res1 => console.log(1, res1)).catch(err => console.log(1, err))
+      console.log(state)
+      getList().then(res1 => console.log(1, state, res1)).catch(err => console.log(1, err))
       getList().then(res2 => console.log(2, res2)).catch(err => console.log(2, err))
       getList().then(res3 => console.log(3, res3)).catch(err => console.log(3, err))
       getList().then(res4 => console.log(4, res4)).catch(err => console.log(4, err))

@@ -13,6 +13,7 @@ import { methodWithBody } from './utils'
 import login from './login'
 
 const lock = new Semaphore(3)
+const loginLock = new Semaphore(1)
 
 export function contentType(ctx, next) {
   if (methodWithBody(ctx.method)) {
@@ -30,45 +31,24 @@ export function contentType(ctx, next) {
         break
     }
   }
-
   return next()
 }
 
 export async function checkLogin(ctx, next) {
-  let timeer = null
   const { url, ...options } = extend(true, {}, ctx)
   const error = `由于程序登录失败，当前接口${url}可能无法正常调用`
   switch (state.loggedIn) {
     case 0: // 未登录
-      if (state.logging) { // 当前正在登录中
-        const daly = new Promise((resolve, reject) => {
-          timeer = setInterval(() => {
-            if (state.loggedIn === 1) {
-              clearInterval(timeer)
-              resolve(next)
-            } else if (state.loggedIn === 2) {
-              clearInterval(timeer)
-              reject(error)
-            }
-          })
-        })
-        return daly.then((next) => {
-          return next()
-        }).catch(error => {
-          console.log(error)
-          return next()
-        })
-      } else {
-        try {
-          console.log('尝试登录')
-          clearInterval(timeer)
+      try {
+        if (loginLock.tryAcquire()) {
           await login()
-          return next()
-        } catch (error) {
-          return next()
+        } else {
+          await loginLock.wait()
         }
+        return await next()
+      } finally {
+        loginLock.release()
       }
-      break
     case 1: // 已登录
       const res = await next()
       if (res.data.code === 401) {
@@ -77,6 +57,7 @@ export async function checkLogin(ctx, next) {
       }
       return res.data
     case 2: // 登录失败
+      console.log(error)
       return next()
   }
 }
