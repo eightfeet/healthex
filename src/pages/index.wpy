@@ -2,9 +2,45 @@
   .container {
     background-color: #eee;
   }
+  #green {
+    background-color: green;
+  }
+  #red {
+    background-color: red;
+  }
+  #yellow {
+    background-color: yellow;
+  }
+  #blue {
+    background-color: blue;
+  }
+  .scroll-view-item_H {
+    height: 300rpx;
+  }
+  .swiper {
+    width: 100%;
+    height: 300rpx
+  }
 </style>
 <template>
   <view class="container">
+    <swiper class="swiper" indicator-dots autoplay >
+      <block>
+        <swiper-item>
+          <view id="green" class="scroll-view-item_H"></view>
+        </swiper-item>
+        <swiper-item>
+          <view id="red" class="scroll-view-item_H"></view>
+        </swiper-item>
+        <swiper-item>
+          <view id="yellow" class="scroll-view-item_H"></view>
+        </swiper-item>
+        <swiper-item>
+          <view id="blue" class="scroll-view-item_H"></view>
+        </swiper-item>
+      </block>
+    </swiper>
+
    个人信息
     <view>
       {{userName}}
