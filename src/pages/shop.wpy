@@ -2,29 +2,64 @@
   .container {
     background-color: #eee;
   }
+  .search-header {
+    width: 710rpx;
+    height: 91rpx;
+    display: flex;
+    flex-wrap: nowrap;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+    padding: 0 20rpx;
+    font-size: 29rpx;
+    color: #333;
+  }
+  .search-header .input-box {
+    position: relative;
+    margin-top: 16rpx;
+    float: left;
+    width: 0;
+    order: 1;
+    height: 59rpx;
+    line-height: 59rpx;
+    padding: 0 20rpx;
+    border-radius: 30rpx;
+    background: #f4f4f4;
+    flex-grow: 1;
+    text-indent: 35rpx;
+  }
+  .search-input {
+    height: 57rpx;
+  }
+  .search-header .icon {
+    position: absolute;
+    top: 14rpx;
+    left: 20rpx;
+    width: 31rpx;
+    height: 31rpx;
+  }
 </style>
+
 <template>
   <view class="container">
-  商城
+    <navigator url="search" class="search-header">
+      <view class="input-box">
+        <image class="icon" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png" />
+        <input name="input" focus="false" class="search-input" disabled confirm-type="search" placeholder="搜索" />
+        <image class="del" wx:if="{{keyword}}" bindtap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png" />
+      </view>
+    </navigator>
+    商城
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
   export default class Shop extends wepy.page {
     config = {
       navigationBarTitleText: '商城'
     }
-    components = {
-    }
-
-    data = {
-
-    }
-
-    onLoad() {
-
-    }
+    components = {}
+    data = {}
+    onLoad() {}
   }
 </script>

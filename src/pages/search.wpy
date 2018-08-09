@@ -1,15 +1,13 @@
 <style lang="less">
-  page{
+  page {
     min-height: 100%;
     background-color: #f4f4f4;
   }
-
-  .container{
+  .container {
     min-height: 100%;
     background-color: #f4f4f4;
   }
-
-  .search-header{
+  .search-header {
     position: fixed;
     top: 0;
     width: 750rpx;
@@ -17,13 +15,12 @@
     display: flex;
     flex-wrap: nowrap;
     background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,.15);
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
     padding: 0 31.25rpx;
     font-size: 29rpx;
     color: #333;
   }
-
-  .search-header .input-box{
+  .search-header .input-box {
     position: relative;
     margin-top: 16rpx;
     float: left;
@@ -31,20 +28,19 @@
     order: 1;
     height: 59rpx;
     line-height: 59rpx;
+    border-radius: 30rpx;
     padding: 0 20rpx;
     background: #f4f4f4;
     flex-grow: 1;
   }
-
-  .search-header .icon{
+  .search-header .icon {
     position: absolute;
     top: 14rpx;
     left: 20rpx;
     width: 31rpx;
     height: 31rpx;
   }
-
-  .search-header .del{
+  .search-header .del {
     position: absolute;
     top: 3rpx;
     right: 10rpx;
@@ -52,8 +48,7 @@
     height: 53rpx;
     z-index: 10;
   }
-
-  .search-header .keyword{
+  .search-header .keyword {
     position: absolute;
     top: 0;
     left: 40rpx;
@@ -61,8 +56,7 @@
     height: 59rpx;
     padding-left: 30rpx;
   }
-
-  .search-header .right{
+  .search-header .right {
     margin-top: 24rpx;
     margin-left: 31rpx;
     margin-right: 6rpx;
@@ -72,14 +66,12 @@
     order: 2;
     flex-grow: 0;
   }
-
-  .no-search{
+  .no-search {
     height: auto;
     overflow: hidden;
     margin-top: 91rpx;
   }
-
-  .serach-keywords{
+  .serach-keywords {
     background: #fff;
     position: relative;
     width: 750rpx;
@@ -87,8 +79,7 @@
     overflow: hidden;
     margin-bottom: 20rpx;
   }
-
-  .serach-keywords .h{
+  .serach-keywords .h {
     padding: 0 31.25rpx;
     height: 93rpx;
     line-height: 93rpx;
@@ -96,14 +87,12 @@
     color: #999;
     font-size: 29rpx;
   }
-
-  .serach-keywords .title{
+  .serach-keywords .title {
     display: block;
     width: 120rpx;
     float: left;
   }
-
-  .serach-keywords .icon{
+  .serach-keywords .icon {
     top: 19rpx;
     right: 19rpx;
     position: absolute;
@@ -111,40 +100,35 @@
     height: 55rpx;
     width: 55rpx;
   }
-
-  .serach-keywords .b{
+  .serach-keywords .b {
     width: 750rpx;
     height: auto;
     overflow: hidden;
     padding-left: 31.25rpx;
   }
-
-  .serach-keywords .item{
+  .serach-keywords .item {
     display: inline-block;
     width: auto;
     height: 48rpx;
     line-height: 48rpx;
-    padding:0 15rpx;
+    padding: 0 15rpx;
     border: 1px solid #999;
     margin: 0 31.25rpx 31.25rpx 0;
     font-size: 24rpx;
     color: #333;
   }
-
-  .serach-keywords .item.active{
+  .serach-keywords .item.active {
     color: #b4282d;
     border: 1px solid #b4282d;
   }
-
-  .shelper-list{
+  .shelper-list {
     width: 750rpx;
     height: auto;
     overflow: hidden;
     background: #fff;
     padding: 0 31.25rpx;
   }
-
-  .shelper-list .item{
+  .shelper-list .item {
     height: 93rpx;
     width: 687.5rpx;
     line-height: 93rpx;
@@ -152,17 +136,14 @@
     color: #333;
     border-bottom: 1px solid #f4f4f4;
   }
-
-
-  .sort{
+  .sort {
     position: fixed;
     top: 91rpx;
     background: #fff;
     width: 100%;
     height: 78rpx;
   }
-
-  .sort-box{
+  .sort-box {
     background: #fff;
     width: 100%;
     height: 78rpx;
@@ -171,43 +152,36 @@
     display: flex;
     border-bottom: 1px solid #d9d9d9;
   }
-
-  .sort-box .item{
+  .sort-box .item {
     height: 78rpx;
     line-height: 78rpx;
     text-align: center;
-    flex:1;
+    flex: 1;
     color: #333;
     font-size: 30rpx;
   }
-
-  .sort-box .item .txt{
+  .sort-box .item .txt {
     display: block;
     width: 100%;
     height: 100%;
     color: #333;
   }
-
-  .sort-box .item.active .txt{
+  .sort-box .item.active .txt {
     color: #b4282d;
   }
-
-  .sort-box .item.by-price{
+  .sort-box .item.by-price {
     background: url(//yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/no-3127092a69.png) 155rpx center no-repeat;
     background-size: 15rpx 21rpx;
   }
-
-  .sort-box .item.by-price.active.asc{
+  .sort-box .item.by-price.active.asc {
     background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/up-636b92c0a5.png) 155rpx center no-repeat;
     background-size: 15rpx 21rpx;
   }
-
-  .sort-box .item.by-price.active.desc{
+  .sort-box .item.by-price.active.desc {
     background: url(http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/down-95e035f3e5.png) 155rpx center no-repeat;
     background-size: 15rpx 21rpx;
   }
-
-  .sort-box-category{
+  .sort-box-category {
     background: #fff;
     width: 100%;
     height: auto;
@@ -215,8 +189,7 @@
     padding: 40rpx 40rpx 0 0;
     border-bottom: 1px solid #d9d9d9;
   }
-
-  .sort-box-category .item{
+  .sort-box-category .item {
     height: 54rpx;
     line-height: 54rpx;
     text-align: center;
@@ -227,19 +200,16 @@
     color: #333;
     font-size: 24rpx;
   }
-
-  .sort-box-category .item.active{
+  .sort-box-category .item.active {
     color: #b4282d;
     border: 1px solid #b4282d;
   }
-
-  .cate-item{
+  .cate-item {
     margin-top: 175rpx;
     height: auto;
     overflow: hidden;
   }
-
-  .cate-item .h{
+  .cate-item .h {
     height: 145rpx;
     width: 750rpx;
     display: flex;
@@ -247,37 +217,32 @@
     align-items: center;
     justify-content: center;
   }
-
-  .cate-item .h .name{
+  .cate-item .h .name {
     display: block;
     height: 35rpx;
     margin-bottom: 18rpx;
     font-size: 30rpx;
     color: #333;
   }
-
-  .cate-item .h .desc{
+  .cate-item .h .desc {
     display: block;
     height: 24rpx;
     font-size: 24rpx;
     color: #999;
   }
-
-  .cate-item .b{
+  .cate-item .b {
     width: 750rpx;
     padding: 0 6.25rpx;
     height: auto;
     overflow: hidden;
   }
-
-  .cate-item .list-filter{
+  .cate-item .list-filter {
     height: 80rpx;
     width: 100%;
     background: #fff;
     margin-bottom: 6.25rpx;
   }
-
-  .cate-item .b .item{
+  .cate-item .b .item {
     float: left;
     background: #fff;
     width: 365rpx;
@@ -287,17 +252,14 @@
     overflow: hidden;
     text-align: center;
   }
-
-  .cate-item .b .item-b{
+  .cate-item .b .item-b {
     margin-left: 6.25rpx;
   }
-
-  .cate-item .item .img{
+  .cate-item .item .img {
     width: 302rpx;
     height: 302rpx;
   }
-
-  .cate-item .item .name{
+  .cate-item .item .name {
     display: block;
     width: 365.625rpx;
     height: 35rpx;
@@ -308,8 +270,7 @@
     font-size: 30rpx;
     color: #333;
   }
-
-  .cate-item .item .price{
+  .cate-item .item .price {
     display: block;
     width: 365.625rpx;
     height: 30rpx;
@@ -317,21 +278,18 @@
     font-size: 30rpx;
     color: #b4282d;
   }
-
-  .search-result-empty{
+  .search-result-empty {
     width: 100%;
     height: 100%;
     padding-top: 300rpx;
   }
-
-  .search-result-empty .icon{
+  .search-result-empty .icon {
     margin: 0 auto;
     display: block;
     width: 240rpx;
     height: 240rpx;
   }
-
-  .search-result-empty .text{
+  .search-result-empty .text {
     display: block;
     width: 100%;
     height: 40rpx;
@@ -340,13 +298,19 @@
     color: #999;
   }
 </style>
+
 <template>
   <scroll-view class="container" style="height: 100%;">
     <view class="search-header">
       <view class="input-box">
-        <image class="icon" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png"></image>
-        <input name="input" class="keyword" focus="true" value="{{keyword}}" confirm-type="search" bindinput="inputChange" bindfocus="inputFocus" bindconfirm="onKeywordConfirm" confirm-type="search" placeholder="{{defaultKeyword.keyword}}" />
-        <image class="del" wx:if="{{keyword}}" bindtap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png"></image>
+        <image class="icon" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png" />
+        <input
+          name="input" class="keyword" value="{{keyword}}" confirm-type="search" bindinput="inputChange" bindfocus="inputFocus" bindconfirm="onKeywordConfirm"
+          placeholder="{{defaultKeyword.keyword}}" />
+        <image
+          class="del"
+          wx:if="{{keyword}}"
+          bindtap="clearKeyword" src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/clearIpt-f71b83e3c2.png" />
       </view>
       <view class="right" bindtap="closeSearch">取消</view>
     </view>
@@ -372,7 +336,6 @@
         <view class="item" hover-class="navigator-hover" wx:for="{{helpKeyword}}" bindtap="onKeywordTap" data-keyword="{{item}}" wx:key="{{item.keyword}}">{{item}}</view>
       </view>
     </view>
-
     <view class="search-result" wx:if="{{ searchStatus && goodsList.length}}">
       <view class="sort">
         <view class="sort-box">
@@ -400,7 +363,6 @@
         </view>
       </view>
     </view>
-
     <view class="search-result-empty" wx:if="{{!goodsList.length && searchStatus}}">
       <image class="icon" src="http://yanxuan.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/noSearchResult-7572a94f32.png"></image>
       <text class="text">您寻找的商品还未上架</text>
@@ -410,11 +372,10 @@
 
 <script>
   import wepy from 'wepy'
-
   export default class Search extends wepy.page {
     data = {
       keyword: '',
-      searchStatus: false,
+      searchStatus: true,
       goodsList: [1, 2, 3, 4, 5, 6, 7],
       helpKeyword: ['asdj', '唱啊时刻记得', '啊睡觉的'],
       historyKeyword: ['asdj', '唱啊', '时刻', '记得', '啊睡觉的', 'asdj', '唱啊', '时刻', '记得', '啊睡觉的'],
@@ -429,37 +390,37 @@
       categoryId: 0
     }
     methods = {
-      closeSearch: function () {
+      closeSearch: function() {
         wepy.navigateBack()
       },
-      clearKeyword: function () {
+      clearKeyword: function() {
         this.keyword = ''
         this.searchStatus = false
       },
-      inputChange: function (e) {
+      inputChange: function(e) {
         console.log(e)
         this.keyword = e.detail.value
         this.searchStatus = false
         this.getHelpKeyword()
       },
-      inputFocus: function () {
+      inputFocus: function() {
         this.searchStatus = false
         this.goodsList = []
         if (this.keyword) {
           this.getHelpKeyword()
         }
       },
-      clearHistory: async function () {
+      clearHistory: async function() {
         this.historyKeyword = []
         let res = null
         if (res) {
           console.log('清除成功')
         }
       },
-      onKeywordTap: async function (event) {
+      onKeywordTap: async function(event) {
         await this.getSearchResult(event.target.dataset.keyword)
       },
-      openSortFilter: async function (event) {
+      openSortFilter: async function(event) {
         let currentId = event.currentTarget.id
         switch (currentId) {
           case 'categoryFilter':
@@ -484,7 +445,7 @@
             await this.getGoodsList(false)
         }
       },
-      selectCategory: async function (event) {
+      selectCategory: async function(event) {
         let currentIndex = event.target.dataset.categoryIndex
         let filterCategory = this.filterCategory
         let currentCategory = null
@@ -518,14 +479,14 @@
         this.hotKeyword = res.data.hotKeywordList
       }
     }
-    async getHelpKeyword () {
+    async getHelpKeyword() {
       console.log(this.keyword)
       let res = []
       if (res.errno === 0) {
         this.helpKeyword = res.data
       }
     }
-    async getGoodsList () {
+    async getGoodsList() {
       let res = []
       if (res.errno === 0) {
         this.searchStatus = true
